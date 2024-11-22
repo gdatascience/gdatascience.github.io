@@ -7,6 +7,69 @@
     "text": "This is a Quarto website.\nTo learn more about Quarto websites visit https://quarto.org/docs/websites.\n\n1 + 1\n\n[1] 2"
   },
   {
+    "objectID": "us_border_patrol_encounters/us_border_patrol_encounters.html",
+    "href": "us_border_patrol_encounters/us_border_patrol_encounters.html",
+    "title": "U.S. Border Patrol Encounters",
+    "section": "",
+    "text": "Recently, I saw this graph on X (formerly Twitter) and discovered that the data is available on the U.S. Customs and Border Patrol website. I thought that this data is timely considering the election in a few days, so I decided to analyze the data."
+  },
+  {
+    "objectID": "us_border_patrol_encounters/us_border_patrol_encounters.html#introduction",
+    "href": "us_border_patrol_encounters/us_border_patrol_encounters.html#introduction",
+    "title": "U.S. Border Patrol Encounters",
+    "section": "",
+    "text": "Recently, I saw this graph on X (formerly Twitter) and discovered that the data is available on the U.S. Customs and Border Patrol website. I thought that this data is timely considering the election in a few days, so I decided to analyze the data."
+  },
+  {
+    "objectID": "us_border_patrol_encounters/us_border_patrol_encounters.html#about-the-data",
+    "href": "us_border_patrol_encounters/us_border_patrol_encounters.html#about-the-data",
+    "title": "U.S. Border Patrol Encounters",
+    "section": "About the Data",
+    "text": "About the Data\nEncounter data includes U.S. Border Patrol Title 8 apprehensions, Office of Field Operations Title 8 inadmissibles, and all Title 42 expulsions for fiscal years 2020 to date. Data is available for the Northern Land Border, Southwest Land Border, and Nationwide (i.e., air, land, and sea modes of transportation) encounters."
+  },
+  {
+    "objectID": "us_border_patrol_encounters/us_border_patrol_encounters.html#nationwide-encounters-by-area-of-responsibility",
+    "href": "us_border_patrol_encounters/us_border_patrol_encounters.html#nationwide-encounters-by-area-of-responsibility",
+    "title": "U.S. Border Patrol Encounters",
+    "section": "Nationwide Encounters by Area of Responsibility",
+    "text": "Nationwide Encounters by Area of Responsibility\nHere is a glimpse of the data:\n\n\nCode\nglimpse(cbp_resp_raw)\n\n\nRows: 112,603\nColumns: 12\n$ `Fiscal Year`            &lt;dbl&gt; 2020, 2020, 2020, 2020, 2020, 2020, 2020, 202…\n$ `Month Grouping`         &lt;chr&gt; \"FYTD\", \"FYTD\", \"FYTD\", \"FYTD\", \"FYTD\", \"FYTD…\n$ `Month (abbv)`           &lt;chr&gt; \"APR\", \"APR\", \"APR\", \"APR\", \"APR\", \"APR\", \"AP…\n$ Component                &lt;chr&gt; \"Office of Field Operations\", \"Office of Fiel…\n$ `Land Border Region`     &lt;chr&gt; \"Northern Land Border\", \"Northern Land Border…\n$ `Area of Responsibility` &lt;chr&gt; \"Boston Field Office\", \"Boston Field Office\",…\n$ `AOR (Abbv)`             &lt;chr&gt; \"Boston\", \"Boston\", \"Boston\", \"Boston\", \"Bost…\n$ Demographic              &lt;chr&gt; \"FMUA\", \"FMUA\", \"Single Adults\", \"Single Adul…\n$ Citizenship              &lt;chr&gt; \"BRAZIL\", \"CANADA\", \"CANADA\", \"CANADA\", \"CHIN…\n$ `Title of Authority`     &lt;chr&gt; \"Title 8\", \"Title 8\", \"Title 42\", \"Title 8\", …\n$ `Encounter Type`         &lt;chr&gt; \"Inadmissibles\", \"Inadmissibles\", \"Expulsions…\n$ `Encounter Count`        &lt;dbl&gt; 3, 1, 2, 239, 1, 0, 1, 6, 1, 1, 1, 18, 52, 1,…"
+  },
+  {
+    "objectID": "us_border_patrol_encounters/us_border_patrol_encounters.html#reproduce-the-plot",
+    "href": "us_border_patrol_encounters/us_border_patrol_encounters.html#reproduce-the-plot",
+    "title": "U.S. Border Patrol Encounters",
+    "section": "Reproduce the plot",
+    "text": "Reproduce the plot\nLet’s try to reproduce the “Inadmissible Aliens” plot by @fentasyl. It is not called out in the Tweet, but “CHNV” refers to citizens of Cuba, Haiti, Nicaragua, and Venezuela. Also, “Interior” includes Northern Land Border encounters.\n\n\nCode\ncbp_resp |&gt;\n  filter(\n    encounter_type == \"Inadmissibles\",\n    chnv\n  ) |&gt;\n  mutate(\n    chnv_region = if_else(\n      land_border_region == \"Southwest Land Border\",\n      \"CHNV\\nSouthern\\nBorder\",\n      \"CHNV\\nInterior\\n\"\n    )\n  ) |&gt;\n  count(\n    bom_month_date, chnv_region,\n    wt = encounter_count,\n    name = \"total_encounters\"\n  ) |&gt;\n  ggplot(\n    aes(\n      x = bom_month_date,\n      y = total_encounters,\n      fill = chnv_region\n    )\n  ) +\n  geom_col(\n    color = \"black\",\n    lwd = 0.25,\n    # make the bars wider\n    width = 28\n  ) +\n  scale_fill_manual(\n    values = c(\"#C10000\", \"#0F4962\")\n  ) +\n  scale_x_date(\n    date_breaks = \"1 year\", \n    date_labels = \"%Y\"\n  ) +\n  scale_y_continuous(\n    minor_breaks = seq(0, 65000, 2500),\n    breaks = seq(0, 65000, 10000)\n  ) +\n  labs(\n    x = NULL,\n    y = NULL,\n    fill = NULL,\n    title = '\"Inadmissible\" Aliens',\n    subtitle = \"Per Month, Jan 2020 - Sep 2024\",\n    caption = \"Source: U.S. Customs and Border Patrol  |  Inspired by: @fentasyl\"\n  ) +\n  theme(\n    panel.grid.major.x = element_blank(),\n    panel.grid.minor.x = element_blank(),\n    axis.ticks = element_blank(),\n    panel.border = element_blank(),\n    plot.title = element_text(\n      size = 20,\n      face = \"bold\"\n    ),\n    # add more horizontal grid lines\n    panel.grid.major.y = element_line(\n      color = \"gray60\", \n      linewidth = 0.25\n    ),\n    panel.grid.minor.y = element_line(\n      color = \"gray90\", \n      linewidth = 0.25\n    ),\n    # move the legend inside the panel/plot\n    legend.position = c(0.3, 0.5),\n    # add a border to the legend\n    legend.background = element_rect(\n      color = \"black\",\n      fill = \"white\"\n    ),\n    # make the legend key a small box instead of a tall rectangle\n    legend.key.width = unit(0.25, \"cm\"),\n    legend.key.height = unit(0.25, \"cm\"),\n    # move up the x axis text\n    axis.text.x = element_text(\n      margin = margin(t = -10)\n    )\n  )\n\n\n\n\n\nReproduction of @fentasyl‘s ’Inadmissible Aliens’ plot\n\n\n\n\nThe data in the plot above does not seem to match the original. Especially the end of 2023. Also, I couldn’t quite figure out how to make the legend key a small box instead of a tall rectangle."
+  },
+  {
+    "objectID": "us_border_patrol_encounters/us_border_patrol_encounters.html#are-admissible-border-crossings-down",
+    "href": "us_border_patrol_encounters/us_border_patrol_encounters.html#are-admissible-border-crossings-down",
+    "title": "U.S. Border Patrol Encounters",
+    "section": "Are “Admissible” border crossings down?",
+    "text": "Are “Admissible” border crossings down?\nThe media is claiming that border crossings are down, but they do not count “inadmissible” border crossings as “border crossings”. Let’s see if the “admissible” border crossings are down.\n\n\nCode\ncbp_resp |&gt;\n  filter(\n    encounter_type != \"Inadmissibles\"\n  ) |&gt;\n  count(\n    bom_month_date,\n    wt = encounter_count,\n    name = \"total_encounters\"\n  ) |&gt;\n  ggplot(\n    aes(\n      x = bom_month_date,\n      y = total_encounters\n    )\n  ) +\n  geom_point(\n    color = \"#C10000\",\n    alpha = 0.5\n  ) +\n  geom_smooth(\n    method = \"loess\",\n    color = \"#0F4962\",\n    se = FALSE\n  ) +\n  scale_x_date(\n    date_breaks = \"1 year\", \n    date_labels = \"%Y\"\n  ) +\n  scale_y_continuous(\n    labels = scales::comma_format()\n  ) +\n  labs(\n    x = NULL,\n    y = NULL,\n    fill = NULL,\n    title = '\"Admissible\" Aliens',\n    subtitle = \"Per Month, Jan 20200 - Sep 2024\",\n    caption = \"Source: U.S. Customs and Border Patrol\"\n  ) +\n  theme(\n    panel.grid.major.x = element_blank(),\n    panel.grid.minor.x = element_blank(),\n    axis.ticks = element_blank(),\n    panel.border = element_blank(),\n    plot.title = element_text(\n      size = 20,\n      face = \"bold\"\n    ),\n    # add more horizontal grid lines\n    panel.grid.major.y = element_line(\n      color = \"gray60\", \n      linewidth = 0.25\n    ),\n    panel.grid.minor.y = element_line(\n      color = \"gray90\", \n      linewidth = 0.25\n    ),\n    axis.text.x = element_text(\n      margin = margin(t = -10)\n    )\n  )\n\n\n\n\n\nAdmissible Aliens\n\n\n\n\nIt seems that “admissible” border crossings are down since the beginning of 2024. Let’s take a look at a combined plot that includes citizens of all countries."
+  },
+  {
+    "objectID": "us_border_patrol_encounters/us_border_patrol_encounters.html#combined-plot",
+    "href": "us_border_patrol_encounters/us_border_patrol_encounters.html#combined-plot",
+    "title": "U.S. Border Patrol Encounters",
+    "section": "Combined Plot",
+    "text": "Combined Plot\n\n\nCode\ncbp_resp |&gt;\n  count(\n    bom_month_date,\n    wt = encounter_count,\n    name = \"total_encounters\"\n  ) |&gt;\n  ggplot(\n    aes(\n      x = bom_month_date,\n      y = total_encounters\n    )\n  ) +\n  geom_point(\n    color = \"#C10000\",\n    alpha = 0.5\n  ) +\n  geom_smooth(\n    method = \"loess\",\n    color = \"#0F4962\",\n    se = FALSE\n  ) +\n  scale_x_date(\n    date_breaks = \"1 year\", \n    date_labels = \"%Y\"\n  ) +\n  scale_y_continuous(\n    labels = scales::comma_format()\n  ) +\n  labs(\n    x = NULL,\n    y = NULL,\n    title = \"All Encounters\",\n    subtitle = \"Per Month, Jan 20200 - Sep 2024\",\n    caption = \"Source: U.S. Customs and Border Patrol\"\n  ) +\n  theme(\n    panel.grid.major.x = element_blank(),\n    panel.grid.minor.x = element_blank(),\n    axis.ticks = element_blank(),\n    panel.border = element_blank(),\n    plot.title = element_text(\n      size = 20,\n      face = \"bold\"\n    ),\n    # add more horizontal grid lines\n    panel.grid.major.y = element_line(\n      color = \"gray60\", \n      linewidth = 0.25\n    ),\n    panel.grid.minor.y = element_line(\n      color = \"gray90\", \n      linewidth = 0.25\n    ),\n    axis.text.x = element_text(\n      margin = margin(t = -10)\n    )\n  )\n\n\n\n\n\nAll Aliens\n\n\n\n\nIt looks like border crossings are down since 2024 whether you count “admissible” or “inadmissible” border crossings. Let’s see if the story is different for citizens of Cuba, Haiti, Nicaragua, and Venezuela."
+  },
+  {
+    "objectID": "us_border_patrol_encounters/us_border_patrol_encounters.html#chnv-plot",
+    "href": "us_border_patrol_encounters/us_border_patrol_encounters.html#chnv-plot",
+    "title": "U.S. Border Patrol Encounters",
+    "section": "CHNV Plot",
+    "text": "CHNV Plot\n\n\nCode\ncbp_resp |&gt;\n  filter(chnv) |&gt;\n  count(\n    bom_month_date,\n    wt = encounter_count,\n    name = \"total_encounters\"\n  ) |&gt;\n  ggplot(\n    aes(\n      x = bom_month_date,\n      y = total_encounters\n    )\n  ) +\n  geom_point(\n    color = \"#C10000\",\n    alpha = 0.5\n  ) +\n  geom_smooth(\n    method = \"loess\",\n    color = \"#0F4962\",\n    se = FALSE\n  ) +\n  scale_x_date(\n    date_breaks = \"1 year\", \n    date_labels = \"%Y\"\n  ) +\n  scale_y_continuous(\n    labels = scales::comma_format()\n  ) +\n  labs(\n    x = NULL,\n    y = NULL,\n    title = \"All CHNV Encounters\",\n    subtitle = \"Per Month, Jan 20200 - Sep 2024\",\n    caption = \"Source: U.S. Customs and Border Patrol\"\n  ) +\n  theme(\n    panel.grid.major.x = element_blank(),\n    panel.grid.minor.x = element_blank(),\n    axis.ticks = element_blank(),\n    panel.border = element_blank(),\n    plot.title = element_text(\n      size = 20,\n      face = \"bold\"\n    ),\n    # add more horizontal grid lines\n    panel.grid.major.y = element_line(\n      color = \"gray60\", \n      linewidth = 0.25\n    ),\n    panel.grid.minor.y = element_line(\n      color = \"gray90\", \n      linewidth = 0.25\n    ),\n    axis.text.x = element_text(\n      margin = margin(t = -10)\n    )\n  )\n\n\n\n\n\nCHNV"
+  },
+  {
+    "objectID": "us_border_patrol_encounters/us_border_patrol_encounters.html#conclusion",
+    "href": "us_border_patrol_encounters/us_border_patrol_encounters.html#conclusion",
+    "title": "U.S. Border Patrol Encounters",
+    "section": "Conclusion",
+    "text": "Conclusion\nIt seems that border crossings are down since 2024 whether you count “admissible” or “inadmissible” border crossings. The story is the same for citizens of Cuba, Haiti, Nicaragua, and Venezuela.\nThe data does not seem to match the original plot by @fentasyl. I am not sure if the data is different or if I made a mistake in my analysis."
+  },
+  {
     "objectID": "about.html",
     "href": "about.html",
     "title": "About",
