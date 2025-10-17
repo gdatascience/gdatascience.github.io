@@ -14,4 +14,4 @@ To learn more about Quarto websites visit <https://quarto.org/docs/websites>.
 
 # TidyTuesday
 
-[![](https://github.com/gdatascience/tidytuesday/blob/master/2025_09_30_tidy_tuesday_cranes.png?raw=true)](https://github.com/gdatascience/tidytuesday/blob/master/2025_09_30_tidy_tuesday_cranes.Rmd)
+[![](https://raw.githubusercontent.com/gdatascience/tidytuesday/refs/heads/master/2025_09_30_tidy_tuesday_cranes.png)](https://github.com/gdatascience/tidytuesday/blob/master/2025_09_30_tidy_tuesday_cranes.Rmd)
