@@ -9,9 +9,6 @@ website:
         text: Home
       - about.qmd
 
-exclude:
-  - us_border_patrol_encounters/
-
 format:
   html:
     theme: cosmo
