@@ -7,6 +7,13 @@
     "text": "This is a Quarto website.\nTo learn more about Quarto websites visit https://quarto.org/docs/websites.\n\n1 + 1\n\n[1] 2"
   },
   {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "About this site\n\n1 + 1\n\n[1] 2"
+  },
+  {
     "objectID": "us_border_patrol_encounters/us_border_patrol_encounters.html",
     "href": "us_border_patrol_encounters/us_border_patrol_encounters.html",
     "title": "U.S. Border Patrol Encounters",
@@ -32,7 +39,7 @@
     "href": "us_border_patrol_encounters/us_border_patrol_encounters.html#nationwide-encounters-by-area-of-responsibility",
     "title": "U.S. Border Patrol Encounters",
     "section": "Nationwide Encounters by Area of Responsibility",
-    "text": "Nationwide Encounters by Area of Responsibility\nHere is a glimpse of the data:\n\n\nCode\nglimpse(cbp_resp_raw)\n\n\nRows: 112,603\nColumns: 12\n$ `Fiscal Year`            &lt;dbl&gt; 2020, 2020, 2020, 2020, 2020, 2020, 2020, 202…\n$ `Month Grouping`         &lt;chr&gt; \"FYTD\", \"FYTD\", \"FYTD\", \"FYTD\", \"FYTD\", \"FYTD…\n$ `Month (abbv)`           &lt;chr&gt; \"APR\", \"APR\", \"APR\", \"APR\", \"APR\", \"APR\", \"AP…\n$ Component                &lt;chr&gt; \"Office of Field Operations\", \"Office of Fiel…\n$ `Land Border Region`     &lt;chr&gt; \"Northern Land Border\", \"Northern Land Border…\n$ `Area of Responsibility` &lt;chr&gt; \"Boston Field Office\", \"Boston Field Office\",…\n$ `AOR (Abbv)`             &lt;chr&gt; \"Boston\", \"Boston\", \"Boston\", \"Boston\", \"Bost…\n$ Demographic              &lt;chr&gt; \"FMUA\", \"FMUA\", \"Single Adults\", \"Single Adul…\n$ Citizenship              &lt;chr&gt; \"BRAZIL\", \"CANADA\", \"CANADA\", \"CANADA\", \"CHIN…\n$ `Title of Authority`     &lt;chr&gt; \"Title 8\", \"Title 8\", \"Title 42\", \"Title 8\", …\n$ `Encounter Type`         &lt;chr&gt; \"Inadmissibles\", \"Inadmissibles\", \"Expulsions…\n$ `Encounter Count`        &lt;dbl&gt; 3, 1, 2, 239, 1, 0, 1, 6, 1, 1, 1, 18, 52, 1,…"
+    "text": "Nationwide Encounters by Area of Responsibility\nHere is a glimpse of the data:\n\n\nCode\nglimpse(cbp_resp_raw)\n\n\nRows: 68,815\nColumns: 12\n$ fiscal_year            &lt;dbl&gt; 2020, 2020, 2020, 2020, 2020, 2020, 2020, 2020,…\n$ month_grouping         &lt;chr&gt; \"FYTD\", \"FYTD\", \"FYTD\", \"FYTD\", \"FYTD\", \"FYTD\",…\n$ month_abbv             &lt;chr&gt; \"APR\", \"APR\", \"APR\", \"APR\", \"APR\", \"APR\", \"APR\"…\n$ component              &lt;chr&gt; \"Office of Field Operations\", \"Office of Field …\n$ land_border_region     &lt;chr&gt; \"Northern Land Border\", \"Northern Land Border\",…\n$ area_of_responsibility &lt;chr&gt; \"Boston Field Office\", \"Boston Field Office\", \"…\n$ aor_abbv               &lt;chr&gt; \"Boston\", \"Boston\", \"Boston\", \"Boston\", \"Boston…\n$ demographic            &lt;chr&gt; \"FMUA\", \"FMUA\", \"Single Adults\", \"Single Adults…\n$ citizenship            &lt;chr&gt; \"BRAZIL\", \"CANADA\", \"CANADA\", \"CANADA\", \"CHINA,…\n$ title_of_authority     &lt;chr&gt; \"Title 8\", \"Title 8\", \"Title 42\", \"Title 8\", \"T…\n$ encounter_type         &lt;chr&gt; \"Inadmissibles\", \"Inadmissibles\", \"Expulsions\",…\n$ encounter_count        &lt;dbl&gt; 3, 1, 2, 239, 1, 0, 1, 6, 1, 1, 1, 18, 52, 1, 2…"
   },
   {
     "objectID": "us_border_patrol_encounters/us_border_patrol_encounters.html#reproduce-the-plot",
@@ -68,12 +75,5 @@
     "title": "U.S. Border Patrol Encounters",
     "section": "Conclusion",
     "text": "Conclusion\nIt seems that border crossings are down since 2024 whether you count “admissible” or “inadmissible” border crossings. The story is the same for citizens of Cuba, Haiti, Nicaragua, and Venezuela.\nThe data does not seem to match the original plot by @fentasyl. I am not sure if the data is different or if I made a mistake in my analysis."
-  },
-  {
-    "objectID": "about.html",
-    "href": "about.html",
-    "title": "About",
-    "section": "",
-    "text": "About this site\n\n1 + 1\n\n[1] 2"
   }
 ]
