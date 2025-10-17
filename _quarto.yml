@@ -10,7 +10,7 @@ website:
       - about.qmd
 
 exclude:
-  - us_border_patrol_encounters/us_border_patrol_encounters.qmd 
+  - us_border_patrol_encounters/
 
 format:
   html:
