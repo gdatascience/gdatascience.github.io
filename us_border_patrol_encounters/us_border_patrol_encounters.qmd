@@ -27,15 +27,9 @@ library(janitor)
 
 theme_set(theme_light())
 
-cbp_resp_raw <- bind_rows(
-  read_csv("https://www.cbp.gov/sites/default/files/assets/documents/2023-Nov/nationwide-encounters-fy20-fy23-aor.csv"),
-  read_csv("https://www.cbp.gov/sites/default/files/2024-10/nationwide-encounters-fy21-fy24-aor.csv")
-)
+cbp_resp_raw <- read_csv("https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2024/2024-11-26/cbp_resp.csv")
 
-cbp_state_raw <- bind_rows(
-  read_csv("https://www.cbp.gov/sites/default/files/assets/documents/2023-Nov/nationwide-encounters-fy20-fy23-state.csv"),
-  read_csv("https://www.cbp.gov/sites/default/files/2024-10/nationwide-encounters-fy21-fy24-state.csv")
-)
+cbp_state_raw <- read_csv("https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2024/2024-11-26/cbp_state.csv")
 
 cbp_resp <- cbp_resp_raw |>
   clean_names() |>
