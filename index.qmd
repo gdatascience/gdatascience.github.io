@@ -8,8 +8,8 @@ author: "Tony Galvan"
 
 ## 2025-09-30 Crane Observations at Lake Hornborgasjön, Sweden (1994–2024)
 
-\[![](https://raw.githubusercontent.com/gdatascience/tidytuesday/refs/heads/master/2025_09_30_tidy_tuesday_cranes.png)](https://github.com/gdatascience/tidytuesday/blob/master/2025_09_30_tidy_tuesday_cranes.Rmd)
+[![](https://raw.githubusercontent.com/gdatascience/tidytuesday/refs/heads/master/2025_09_30_tidy_tuesday_cranes.png)](https://github.com/gdatascience/tidytuesday/blob/master/2025_09_30_tidy_tuesday_cranes.Rmd)
 
 ## 2025-09-23 FIDE Chess Player Ratings (1994–2024)
 
-\[![](https://raw.githubusercontent.com/gdatascience/tidytuesday/refs/heads/master/2025_09_23_tidy_tuesday_chess.png){width="50%"}
+[![](https://raw.githubusercontent.com/gdatascience/tidytuesday/refs/heads/master/2025_09_23_tidy_tuesday_chess.png)](https://github.com/gdatascience/tidytuesday/blob/master/2025_09_23_tidy_tuesday_chess.Rmd){width="50%"}
